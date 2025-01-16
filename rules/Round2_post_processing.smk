@@ -46,11 +46,10 @@ rule bowtie_genome_index:
     output:
         expand("data/Genome.{ebwt}", ebwt=EBWT)	
     priority: 100
-    threads : 8
     conda:
         "../envs/core.yaml"
     shell:
-        "bowtie-build --threads {threads} {input} {input}"
+        "bowtie-build --threads 8 {input} {input}"
         
 if str2bool(config.get("skip_genome_alignment", False)):
 

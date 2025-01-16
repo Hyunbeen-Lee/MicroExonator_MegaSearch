@@ -103,6 +103,8 @@ else:
             config["Gene_anontation_GTF"]
         output:
             "data/transcriptome.bed12"
+        conda:
+             "../envs/core.yaml"
         shell:
             "python2 src/GTFtoBED12.py {input} > {output}"
   
