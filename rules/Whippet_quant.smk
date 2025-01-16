@@ -119,10 +119,10 @@ if str2bool(config.get("Get_Bamfiles", False)): #config["Get_Bamfiles"])==True:
               flags = "--sam",
               julia = config["julia"]
           output:
-              "Whippet/Quant/TPM/{sample}.gene.tpm.gz",
-              "Whippet/Quant/TPM/{sample}.isoform.tpm.gz",
-              "Whippet/Quant/JNC/{sample}.jnc.gz",
-              "Whippet/Quant/MAP/{sample}.map.gz",
+              "Whippet/Quant/{sample}.gene.tpm.gz",
+              "Whippet/Quant/{sample}.isoform.tpm.gz",
+              "Whippet/Quant/{sample}.jnc.gz",
+              "Whippet/Quant/{sample}.map.gz",
               "Whippet/Quant/{sample}.psi.gz",
               sam = temp("Whippet/BAM/{sample}.sam")
           priority: 100
@@ -141,10 +141,10 @@ else:
               flags = config["whippet_flags"],
               julia = config["julia"]
           output:
-              "Whippet/Quant/TPM/{sample}.gene.tpm.gz",
-              "Whippet/Quant/TPM/{sample}.isoform.tpm.gz",
-              "Whippet/Quant/JNC/{sample}.jnc.gz",
-              "Whippet/Quant/MAP/{sample}.map.gz",
+              "Whippet/Quant/{sample}.gene.tpm.gz",
+              "Whippet/Quant/{sample}.isoform.tpm.gz",
+              "Whippet/Quant/{sample}.jnc.gz",
+              "Whippet/Quant/{sample}.map.gz",
               "Whippet/Quant/{sample}.psi.gz"
           priority: 100
           shell:
