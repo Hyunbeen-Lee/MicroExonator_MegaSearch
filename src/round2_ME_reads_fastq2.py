@@ -16,12 +16,11 @@ def main(alingment_pre_processed_round2, row_fastq):
 
     for row in csv.reader(open(alingment_pre_processed_round2), delimiter = '\t'):
 
-
 	#print row, len(row)
 
-
-	read, flag, tag, start, cigar, seq, qual = row[:7]
-        ME_reads.add(read)
+        if len(row)>=7:
+	    read, flag, tag, start, cigar, seq, qual = row[:7]
+            ME_reads.add(read)
 
     with gzip.open(row_fastq) as f:
 

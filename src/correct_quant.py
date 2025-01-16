@@ -29,14 +29,17 @@ with open(snakemake.input["spanning_ME_reads"]) as file:
     reader = csv.reader(file, delimiter="\t")
     
     for row in reader:
-        
-        read, flag, tag, start, cigar, seq, qual = row
+       
+        read, flag, tag, start, cigar, seq, qual = row[:7]
         
         SJ = tag.split("|")[0]
-        micro_exon_seq_found = tag.split("|")[-1].split("_")[1]
-        ME = tags_hit_dict[(SJ, micro_exon_seq_found)]
-        
-        quant_ME_spanning_cov[ME] +=1
+
+        if len(tag.split("|")[-1].split("_"))==3:
+
+            micro_exon_seq_found = tag.split("|")[-1].split("_")[1]
+            ME = tags_hit_dict[(SJ, micro_exon_seq_found)]
+    
+            quant_ME_spanning_cov[ME] +=1
         
 
 
