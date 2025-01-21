@@ -64,7 +64,7 @@ else:
 
 download_fastq_whippet:
     params:
-        {sample}
+        "{sample}"
     output:
         temp("FASTQ/whippet/{sample}.fastq.gz")
     resources:
