@@ -62,7 +62,7 @@ else:
         shell:
             "bash {input}"
 
-download_fastq_whippet:
+rule download_fastq_whippet:
     params:
         "{sample}"
     output:
