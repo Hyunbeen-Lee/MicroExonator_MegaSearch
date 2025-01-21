@@ -62,6 +62,25 @@ else:
         shell:
             "bash {input}"
 
+download_fastq_whippet:
+    params:
+        {sample}
+    output:
+        temp("FASTQ/whippet/{sample}.fastq.gz")
+    resources:
+        get_data = 1 
+    conda:
+        "../envs/download.yaml"
+    priority: 1
+    shell:
+        """
+        srr="' + {params} + '"'
+        fastq-dump.2.11.0 --split-files -O FASTQ/whippet --gzip --defline-qual '+' {params}
+        numLines=$(fastq-dump.2.11.0 -X 1 -Z --split-spot $srr | wc -l)"
+        if [ $numLines -eq 8 ]; then cat FASTQ/whippet/${srr}_1.fastq.gz FASTQ/whippet/${srr}_2.fastq.gz > FASTQ/whippet/$srr.fastq.gz && rm FASTQ/whippet/${srr}_1.fastq.gz FASTQ/whippet/${srr}_2.fastq.gz; fi"
+        if [ -f FASTQ/whippet/${srr}_1.fastq.gz ]; then mv FASTQ/whippet/${srr}_1.fastq.gz FASTQ/whippet/${srr}.fastq.gz ; elif [ -f FASTQ/whippet/${srr}_2.fastq.gz ]; then mv FASTQ/whippet/${srr}_2.fastq.gz FASTQ/whippet/${srr}.fastq.gz; fi
+        """
+
 rule unzip:
    input:
        "FASTQ/{sample}.fastq.gz"
