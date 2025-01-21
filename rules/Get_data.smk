@@ -74,11 +74,10 @@ rule download_fastq_whippet:
     priority: 1
     shell:
         """
-        srr="' + {params} + '"'
         fastq-dump.2.11.0 --split-files -O FASTQ/whippet --gzip --defline-qual '+' {params}
-        numLines=$(fastq-dump.2.11.0 -X 1 -Z --split-spot $srr | wc -l)"
-        if [ $numLines -eq 8 ]; then cat FASTQ/whippet/${srr}_1.fastq.gz FASTQ/whippet/${srr}_2.fastq.gz > FASTQ/whippet/$srr.fastq.gz && rm FASTQ/whippet/${srr}_1.fastq.gz FASTQ/whippet/${srr}_2.fastq.gz; fi"
-        if [ -f FASTQ/whippet/${srr}_1.fastq.gz ]; then mv FASTQ/whippet/${srr}_1.fastq.gz FASTQ/whippet/${srr}.fastq.gz ; elif [ -f FASTQ/whippet/${srr}_2.fastq.gz ]; then mv FASTQ/whippet/${srr}_2.fastq.gz FASTQ/whippet/${srr}.fastq.gz; fi
+        numLines=$(fastq-dump.2.11.0 -X 1 -Z --split-spot {params} | wc -l)"
+        if [ $numLines -eq 8 ]; then cat FASTQ/whippet/{params}_1.fastq.gz FASTQ/whippet/{params}_2.fastq.gz > FASTQ/whippet/{params}.fastq.gz && rm FASTQ/whippet/{params}_1.fastq.gz FASTQ/whippet/{params}_2.fastq.gz; fi"
+        if [ -f FASTQ/whippet/{params}_1.fastq.gz ]; then mv FASTQ/whippet/{params}_1.fastq.gz FASTQ/whippet/{params}.fastq.gz ; elif [ -f FASTQ/whippet/{params}_2.fastq.gz ]; then mv FASTQ/whippet/{params}_2.fastq.gz FASTQ/whippet/{params}.fastq.gz; fi
         """
 
 rule unzip:
