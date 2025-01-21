@@ -297,7 +297,7 @@ def hard_drive_behavior(fastq):
             return("FASTQ/" + str(fastq) + ".fastq.gz")
 
 def hard_drive_behavior_whippet(fastq):
-    if config.get("Optimize_hard_drive", False)=="T":
+    if config.get("Redownload_Whippet", False)=="T":
 
         if "validate_fastq_list" in config:
         
