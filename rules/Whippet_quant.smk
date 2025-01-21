@@ -111,7 +111,7 @@ if str2bool(config.get("Get_Bamfiles", False)): #config["Get_Bamfiles"])==True:
       rule  whippet_quant:
           input:
               #'FASTQ/{sample}.fastq.gz',
-              hard_drive_behavior(whippet=T),
+              hard_drive_behavior(whippet=True),
               "Whippet/Index/whippet.jls"
           params:
               bin = config["whippet_bin_folder"],
@@ -133,7 +133,7 @@ else:
       rule  whippet_quant:
           input:
               #'FASTQ/{sample}.fastq.gz',
-              hard_drive_behavior(whippet=T),
+              hard_drive_behavior(whippet=True),
               "Whippet/Index/whippet.jls"
           params:
               bin = config["whippet_bin_folder"],
