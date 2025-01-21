@@ -80,10 +80,13 @@ rule download_fastq2:
         #"bash {input[0]}"
         "bash {input[0]} && mv {params} {output}"
 
-def hard_drive_behavior(fastq):
+def hard_drive_behavior(fastq, whippet=False):
     if config.get("Optimize_hard_drive", False)=="T":
+
+        if whippet:
+            return( "FASTQ/whippet/" + fastq + ".fastq.gz")
     
-        if "validate_fastq_list" in config:
+        elif "validate_fastq_list" in config:
         
             to_validate = set[()]
             
