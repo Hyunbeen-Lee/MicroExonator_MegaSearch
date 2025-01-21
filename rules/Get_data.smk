@@ -63,6 +63,8 @@ else:
             "bash {input}"
 
 rule download_fastq_whippet:
+    input:
+        "Whippet/Index/whippet.jls"
     params:
         "{sample}"
     output:
