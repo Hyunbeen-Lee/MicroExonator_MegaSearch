@@ -77,8 +77,8 @@ rule download_fastq_whippet:
     shell:
         """
         fastq-dump.2.11.0 --split-files -O FASTQ/whippet --gzip --defline-qual '+' {params}
-        numLines=$(fastq-dump.2.11.0 -X 1 -Z --split-spot {params} | wc -l)"
-        if [ $numLines -eq 8 ]; then cat FASTQ/whippet/{params}_1.fastq.gz FASTQ/whippet/{params}_2.fastq.gz > FASTQ/whippet/{params}.fastq.gz && rm FASTQ/whippet/{params}_1.fastq.gz FASTQ/whippet/{params}_2.fastq.gz; fi"
+        numLines=$(fastq-dump.2.11.0 -X 1 -Z --split-spot {params} | wc -l)
+        if [ $numLines -eq 8 ]; then cat FASTQ/whippet/{params}_1.fastq.gz FASTQ/whippet/{params}_2.fastq.gz > FASTQ/whippet/{params}.fastq.gz && rm FASTQ/whippet/{params}_1.fastq.gz FASTQ/whippet/{params}_2.fastq.gz; fi
         if [ -f FASTQ/whippet/{params}_1.fastq.gz ]; then mv FASTQ/whippet/{params}_1.fastq.gz FASTQ/whippet/{params}.fastq.gz ; elif [ -f FASTQ/whippet/{params}_2.fastq.gz ]; then mv FASTQ/whippet/{params}_2.fastq.gz FASTQ/whippet/{params}.fastq.gz; fi
         """
 
