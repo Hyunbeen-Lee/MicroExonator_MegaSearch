@@ -36,8 +36,8 @@ if "google_path" in config:
 
 elif str2bool(config.get("Keep_fastq_gz", False)):
     rule download_fastq:
-        input:
-            "download/{sample}.download.sh"
+        params:
+            "{sample}"
         output:
             "FASTQ/{sample}.fastq.gz"
         resources:
@@ -46,12 +46,17 @@ elif str2bool(config.get("Keep_fastq_gz", False)):
             "../envs/download.yaml"
         priority: 1
         shell:
-            "bash {input}"
+            """
+            fastq-dump.2.11.0 --split-files -O FASTQ --gzip --defline-qual '+' {params}
+            numLines=$(fastq-dump.2.11.0 -X 1 -Z --split-spot {params} | wc -l)
+            if [ $numLines -eq 8 ]; then cat FASTQ/{params}_1.fastq.gz FASTQ/{params}_2.fastq.gz > FASTQ/{params}.fastq.gz && rm FASTQ/{params}_1.fastq.gz FASTQ/{params}_2.fastq.gz; fi
+            if [ -f FASTQ/{params}_1.fastq.gz ]; then mv FASTQ/{params}_1.fastq.gz FASTQ/{params}.fastq.gz ; elif [ -f FASTQ/{params}_2.fastq.gz ]; then mv FASTQ/{params}_2.fastq.gz FASTQ/{params}.fastq.gz; fi
+            """
 
 else:
     rule download_fastq:
-        input:
-            "download/{sample}.download.sh"
+        params:
+            "{sample}"
         output:
             temp("FASTQ/{sample}.fastq.gz")
         resources:
@@ -60,7 +65,12 @@ else:
             "../envs/download.yaml"
         priority: 1
         shell:
-            "bash {input}"
+            """
+            fastq-dump.2.11.0 --split-files -O FASTQ --gzip --defline-qual '+' {params}
+            numLines=$(fastq-dump.2.11.0 -X 1 -Z --split-spot {params} | wc -l)
+            if [ $numLines -eq 8 ]; then cat FASTQ/{params}_1.fastq.gz FASTQ/{params}_2.fastq.gz > FASTQ/{params}.fastq.gz && rm FASTQ/{params}_1.fastq.gz FASTQ/{params}_2.fastq.gz; fi
+            if [ -f FASTQ/{params}_1.fastq.gz ]; then mv FASTQ/{params}_1.fastq.gz FASTQ/{params}.fastq.gz ; elif [ -f FASTQ/{params}_2.fastq.gz ]; then mv FASTQ/{params}_2.fastq.gz FASTQ/{params}.fastq.gz; fi
+            """
 
 rule download_fastq_whippet:
     input:
