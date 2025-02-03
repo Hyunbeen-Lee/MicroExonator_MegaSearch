@@ -309,9 +309,9 @@ def hard_drive_behavior_whippet(fastq):
                     to_validate.add(row[0])
                     
             if fastq in to_validate:
-                return("FASTQ/whippet/" + str(fastq) + ".fastq.gz.valid")
+                return("FASTQ/whippet/whippet_" + str(fastq) + ".fastq.gz.valid")
             else:
-                return(  "FASTQ/whippet/" + str(fastq) + ".fastq.gz")
+                return(  "FASTQ/whippet/whippet_" + str(fastq) + ".fastq.gz")
                 
         else:
             return(  "FASTQ/whippet/" + str(fastq) + ".fastq.gz")
