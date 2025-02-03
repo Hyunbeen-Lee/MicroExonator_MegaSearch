@@ -69,7 +69,7 @@ rule quant:
         #expand("Whippet/Quant/{sample}.psi.gz", sample=DATA),
         #expand("Ground_Truth/{sample}.GT.SJ_count", sample=DATA)
 
-rule whippet_quant:
+rule get_whippet_quant:
     input:
         expand("Whippet/Quant/{sample}.psi.ME.gz", sample=DATA)
 
