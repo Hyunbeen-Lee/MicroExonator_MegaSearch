@@ -314,8 +314,8 @@ rule get_whippet_psi:
 include : "rules/sashimi.smk"
 
 
-rule get_whippet_quant:
-    input:
-        expand("Whippet/Quant/{sample}.psi.ME.gz", sample=DATA)
+#rule get_whippet_quant:
+#    input:
+#        expand("Whippet/Quant/{sample}.psi.ME.gz", sample=DATA)
   
 #ruleorder: quant_pool_pb > whippet_quant
