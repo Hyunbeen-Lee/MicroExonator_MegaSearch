@@ -78,7 +78,7 @@ rule download_fastq_whippet:
     params:
         "{sample}"
     output:
-        temp("FASTQ/whippet/{sample}.whippet.fastq.gz")
+        temp("FASTQ/whippet/{sample}.fastq.whippet.gz")
     resources:
         get_data = 1 
     conda:
