@@ -314,7 +314,7 @@ def hard_drive_behavior_whippet(fastq):
                 return(  "FASTQ/whippet/whippet_" + str(fastq) + ".fastq.gz")
                 
         else:
-            return(  "FASTQ/whippet/" + str(fastq) + ".fastq.gz")
+            return(  "FASTQ/whippet/whippet_" + str(fastq) + ".fastq.gz")
     else:
 
         if "validate_fastq_list" in config:
