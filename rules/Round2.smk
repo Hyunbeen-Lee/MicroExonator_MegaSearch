@@ -309,12 +309,12 @@ def hard_drive_behavior_whippet(fastq):
                     to_validate.add(row[0])
                     
             if fastq in to_validate:
-                return("FASTQ/whippet/" + str(fastq) + ".whippet.fastq.gz.valid")
+                return("FASTQ/whippet/" + str(fastq) + ".fastq.whippet.gz.valid")
             else:
-                return(  "FASTQ/whippet/" + str(fastq) + ".whippet.fastq.gz")
+                return(  "FASTQ/whippet/" + str(fastq) + ".fastq.whippet.gz")
                 
         else:
-            return(  "FASTQ/whippet/" + str(fastq) + ".whippet.fastq.gz")
+            return(  "FASTQ/whippet/" + str(fastq) + ".fastq.whippet.gz")
     else:
 
         if "validate_fastq_list" in config:
